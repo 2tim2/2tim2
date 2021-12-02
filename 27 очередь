@@ -1,0 +1,60 @@
+type arr = array [1..7] of real;
+ 
+ 
+var
+  a: arr;
+  max_pr, max_nechet, size, i, n, z, b, y, x: int64;
+ 
+ 
+procedure sdvig(var a: arr);
+begin
+  for var i := 1 to 6 do
+    a[i] := a[i+1];
+  a[7] := 0;
+end;
+ 
+ 
+procedure push(c: real);
+begin
+  size := size + 1;
+  a[size] := c; 
+end;
+ 
+ 
+function pop(z: integer): real;
+begin
+  pop := a[z];
+  size := size - 1;
+end;
+ 
+ 
+begin
+  read(n);
+  max_pr := 0;
+  max_nechet := 0;
+  size := 0;
+  if n > 7 then
+    begin
+      for i := 1 to 7 do
+        begin
+          read(x);
+          Push(x);
+        end;
+      for i := 1 to n-7 do
+        begin
+          read(y);
+          if (y mod 2 <> 0) and (max_nechet <> 0) and (y*max_nechet > max_pr) then
+            max_pr := max_nechet * y;
+          z := 1;
+          b := round(int(Pop(z)));
+          if (b mod 2 <> 0) and (b > max_nechet) then
+            max_nechet := b;
+          sdvig(a);
+          a[7] := y;
+        end;    
+    end;
+  if n <= 7 then
+    for i := 1 to n do
+      read(x);
+  write(max_pr)
+end.
